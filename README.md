@@ -20,7 +20,7 @@ flask run
 
 ```
 python -m env env
-./venv/Scripts/activate
+./env/Scripts/activate
 
 set FLASK_APP=run.py
 set FLASK_ENV=development
@@ -32,5 +32,8 @@ flask run
 ```
 
 ### login
+
+```hehe
 username : admin
 pass : admin
+```
