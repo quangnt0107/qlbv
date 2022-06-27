@@ -1,0 +1,10 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "app",
+      "database": "${workspaceFolder:th_cshtcntt}/app.db"
+    }
+  ]
+}
