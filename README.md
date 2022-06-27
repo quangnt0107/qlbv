@@ -1,20 +1,24 @@
 # qlbv
 
-mac/ubuntu
-cmd
-python -m venv env
-source env/bin/active
+## mac/ubuntu
 
-export FLASK_APP=run.py
-export FLASK_ENV=development
 
-pip install -r requirements.txt  
+```cmd
+ python -m venv env
+ source env/bin/active
+
+ export FLASK_APP=run.py
+ export FLASK_ENV=development
+
+ pip install -r requirements.txt  
 
 flask run
+```
+
+## window
 
 
-window
-cmd
+```
 python -m env env
 ./venv/Scripts/activate
 
@@ -25,3 +29,4 @@ pip install -r requirements.txt
 
 
 flask run
+```
