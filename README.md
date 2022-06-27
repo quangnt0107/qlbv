@@ -30,3 +30,7 @@ pip install -r requirements.txt
 
 flask run
 ```
+
+### login
+username : admin
+pass : admin
