@@ -14,8 +14,14 @@ from flask_admin.contrib.sqla import ModelView
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+
   return render_template('index.html', title='home')
 
+
+@app.route('/result', methods =['GET'])
+def result():
+
+  return render_template('result.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -75,11 +81,38 @@ def logout():
 
 
 # service
-@app.route('/register_service', methods=['GET', 'POST'])
-def register_service():
+@app.route('/chose_service_type', methods=['GET', 'POST'])
+def chose_service_type():
+
+
   service_types = ServiceType.query.all()
 
+  return render_template('chose_service_type.html', service_types=service_types)
+
+
+@app.route('/register_service/<sv_type_id>', methods=['GET', 'POST'])
+def register_service(sv_type_id):
+
+  services = Service.query.filter_by(service_type_id=sv_type_id).all()
+  print(services)
+
   form = RegisterServiceForm()
+  form.services.choices=services
+
+  form.name.data = current_user.username
+  form.email.data = current_user.email
+
+
+  if form.validate_on_submit():
+    current_user.role = 2
+    service=Service.query.filter_by(service_name=form.services.data).first()
+    current_user.services.append(service)
+    db.session.commit()
+
+    flash('Successfully registered service!', 'success')
+    return redirect(url_for('home'))
+
+
 
   return render_template('register_service.html', title='register service', form=form)
 

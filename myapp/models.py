@@ -25,6 +25,12 @@ class TreatmentDoctor (db.Model):
   service_id = db.Column( db.Integer, db.ForeignKey('service.id'))
   role = db.Column(db.Integer, nullable=True, default=3)
 
+userservice = db.Table('userservice',
+  db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+  db.Column('service_id', db.Integer, db.ForeignKey('service.id'), primary_key=True)
+)
+
+
 
 class User(UserMixin, db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -40,7 +46,7 @@ class User(UserMixin, db.Model):
   results = db.relationship('Result',  backref='patient')
 
 
-  services = db.relationship('Service', backref='patient')
+  services = db.relationship('Service', secondary=userservice, backref=db.backref('users', lazy=True))
 
   medicins = db.relationship('Medicine', backref='patient')
 
@@ -78,6 +84,8 @@ def load_user(id):
 
 
 
+
+
 class Service(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   service_name = db.Column(db.String(64), index=True, unique=True)
@@ -90,7 +98,7 @@ class Service(db.Model):
 
 
   def __repr__(self):
-    return '<Service {}>'.format(self.service_name)
+    return (self.service_name)
 
 class ServiceType(db.Model):
   id = db.Column(db.Integer, primary_key=True)

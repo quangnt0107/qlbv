@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block myapp_content %}
+  {% if service_types and service_types is not none %}
+    {% for type in service_types  %}
+      <a href="{{ url_for('register_service', sv_type_id=type.id) }}">{{ type.service_type_name }}</a> <br/>
+    {% endfor %}
+  {% else %}
+    <p>service types not available</p>
+  {% endif %}
+{% endblock %}

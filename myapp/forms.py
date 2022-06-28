@@ -35,5 +35,5 @@ class RegisterServiceForm(FlaskForm):
 
     name = StringField(('Username'), validators=[DataRequired()])
     email = StringField(('Email'), validators=[DataRequired()])
-    service =  SelectField('service types', choices=['1', '2', '3'], validate_choice=False)
+    services =  SelectField('service types', choices=[], validate_choice=False)
     submit = SubmitField(('Register Service'))

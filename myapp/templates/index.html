@@ -2,5 +2,11 @@
 
 
 {% block myapp_content %}
-  <a href="{{ url_for('register_service') }}">Đăng Ký Dịch Vụ Khám Bệnh</a>
+  <a href="{{ url_for('chose_service_type') }}">Đăng Ký Dịch Vụ Khám Bệnh</a> <br/>
+
+  {% set result_length = current_user.results | length %}
+  {% if result_length > 0 %}
+    <a href="{{ url_for('result') }}">Xem Ket Qua Kham</a> <br/>
+  {% endif %}
+
 {% endblock %}
